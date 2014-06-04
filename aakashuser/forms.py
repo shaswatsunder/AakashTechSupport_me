@@ -14,3 +14,6 @@ class RegisterForm(forms.ModelForm):
 		model = User
 		fields = ['tab_id', 'email_id', 'location', 'password', 'repassword']
 		
+
+
+
