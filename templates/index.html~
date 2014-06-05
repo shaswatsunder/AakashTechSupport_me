@@ -73,14 +73,25 @@
 		    </li>
 		  </ul>
 -->	  
-
+			{% if session_id %}
 			<li>
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown"> {{ m.email_id }} <b class="caret"></b></a>
+		      <ul class="dropdown-menu">
+		        <li><a href="#">Settings</a></li>
+		        <li><a href="#">Preferences</a></li>
+		        <li class="divider"></li>
+		        <li><a href="/logout/">LogOut</a></li>
+		      </ul>
+			</li>
+			{% else %}
+			<li>
+				{{ session_id }}
 				<a href="/login/">Login</a>
 			</li>
 			<li>
 				<a href="/register/">Register</a>
 			</li>
-
+			{% endif %}
 		</div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>

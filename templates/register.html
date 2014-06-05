@@ -18,15 +18,10 @@
 		
 		
 		<style>
-		
-		form .alert {
-			display : none;
-		}	
-		
+			
 		.light-wrap {
 			border: 1px solid rgb(194, 199, 208);
 		}
-		
 		
 		</style>
 		
@@ -112,9 +107,20 @@
 					<input type="password" class="form-control" name ="repassword" placeholder="Re-enter Password" required="required" />
 			    </div>
 			    <br/>
-
-				<div class="alert alert-danger">		
+			    
+			    <!-- ERRORS, IF ANY IN POSTFORM -->
+			    
+				{% if er1 or postform.errors%}
+				<div class="alert alert-danger">
+				{% for i in postform.errors %}
+				<p>{{ i }}</p>
+				{% endfor %}
+				
+				{% if er1 %}
+				<p> {{ er1 }} </p>
+				{% endif %}
 				</div>
+			    {% endif %}
 			    
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
 

@@ -17,5 +17,6 @@ urlpatterns = patterns('',
 	url(r'^$', 'aakashuser.views.index', name='indexpage'),
     url(r'^register/$', 'aakashuser.views.register', name='register'),
     url(r'^login/$', 'aakashuser.views.login', name='login'),
+    url(r'^logout/$', 'aakashuser.views.logout', name='logout'),
 	url(r'^index/$', 'aakashuser.views.index', name='index'),
 )
