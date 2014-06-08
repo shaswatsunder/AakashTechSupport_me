@@ -1,6 +1,9 @@
-from django.conf.urls import patterns, include, url
+__author__ = 'ushubham27'
 
+from django.conf.urls import patterns, include, url
 from django.contrib import admin
+
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -14,9 +17,12 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
 
     url(r'^admin/', include(admin.site.urls)),
-	url(r'^$', 'aakashuser.views.index', name='indexpage'),
+    url(r'^aakashuser/', include('aakashuser.urls')),
+    url(r'^$', 'aakashuser.views.index', name='indexpage'),
     url(r'^register/$', 'aakashuser.views.register', name='register'),
-    url(r'^login/$', 'aakashuser.views.login', name='login'),
-    url(r'^logout/$', 'aakashuser.views.logout', name='logout'),
-	url(r'^index/$', 'aakashuser.views.index', name='index'),
+    url(r'^login/$', 'aakashuser.views.login_new', name='login_new'),
+    url(r'^logout/$', 'aakashuser.views.logout_new', name='logout_new'),
+    url(r'^index/$', 'aakashuser.views.index', name='index'),
+    url(r'^search/$', 'aakashuser.views.search', name='index'),
+
 )

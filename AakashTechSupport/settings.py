@@ -20,8 +20,8 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'AakashTechDB',                      # Or path to database file if using sqlite3.
-        
+        'NAME': 'techiedb',                      # Or path to database file if using sqlite3.
+
         # The following settings are not used with sqlite3:
         
         'USER': 'root',
@@ -89,7 +89,6 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 	os.path.join(BASE_DIR, "static"),
 	'/home/shubham/virtualenvs/interns2014/InternFinal/AakashTechSupport/static',
-
     
 )
 
@@ -148,11 +147,17 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'aakashuser'
+    'aakashuser',
+    'taggit',
+    'django_wysiwyg',
+    'tinymce',
+
     # Uncomment the next line to enable the admin:
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+DJANGO_WYSIWYG_FLAVOR = "tinymce"
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
