@@ -11,14 +11,18 @@
 		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
 		<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
 		<link rel="stylesheet" href="{% static 'css/footer.css' %}" />
-		
+		<link rel="stylesheet" href="{% static 'css/ask_que.css' %}" />
+    	
+    		
 		<script src="{% static 'js/jquery.min.js' %}"></script>
 		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+		<script src="{% static 'js/ajax.js' %}"></script>
 		
 	</head>
 	
 	<body>
-	
+
+
 	<!-- NAVBAR CODE -->
 	
 	<nav class="navbar navbar-inverse" role="navigation">
@@ -73,9 +77,9 @@
 		    </li>
 		  </ul>
 -->	  
-			{% if session_id %}
+			{% if user.is_authenticated %}
 			<li>
-			  <a href="#" class="dropdown-toggle" data-toggle="dropdown"> {{ m.email_id }} <b class="caret"></b></a>
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown"> {{ user.username }} <b class="caret"></b></a>
 		      <ul class="dropdown-menu">
 		        <li><a href="#">Settings</a></li>
 		        <li><a href="#">Preferences</a></li>
@@ -85,7 +89,6 @@
 			</li>
 			{% else %}
 			<li>
-				{{ session_id }}
 				<a href="/login/">Login</a>
 			</li>
 			<li>
@@ -96,8 +99,56 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 
+
 	<!-- NAVBAR HEADER CODE COMPLETE -->
-	
+
+    <!-- SMALL MODAL -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Not Loggedin!</h4>
+          </div>
+          <div class="modal-body">
+            <p>You need to login first, to post a question</p>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <!-- NAV PILLS -->
+
+    <div class="container-fluid">
+	<nav class="navbar navbar-default navbar-static-top  col-md-8 col-md-offset-2" role="navigation">
+
+        <ul class="nav navbar-nav">
+          <a class="navbar-brand " href="/questions/" ><b>Questions</b></a>
+        </ul>
+
+        <ul class="nav navbar-nav">
+          <a class="navbar-brand " href="/questions/tag/" ><b>Tags</b></a>
+        </ul>
+
+        <ul class="nav navbar-nav">
+          <a class="navbar-brand " href="/questions/unanswered" ><b>Unanswered</b></a>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          {% if user.is_authenticated %}
+          <a class="navbar-brand " href="/aakashuser/askquestion/" >Ask <b>Question </b></a>
+          {% else %}
+          <a class="navbar-brand " href="#" data-toggle="modal" data-target="#myModal">Ask <b>Question </b></a>
+          {% endif %}
+        </ul>
+
+	</nav>
+	</div>
+
+
+    <!-- NAV PILLS ENDS HERE-->
+
 	<!-- JUMBOTRON -->	
 
 	{% if query %}
@@ -135,7 +186,11 @@
 	{% endif %}
 	
 	<!-- JUMBOTRON ENDS HERE -->
-	
+
+    {% block body_block %}
+
+
+
 	<!-- FOOTER CODE GOES HERE -->
 	
 	<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">	
@@ -154,6 +209,6 @@
 	</nav>
 	
 	<!-- END OF FOOTER -->
-	
+	{% endblock %}
 	</body>
 </html>

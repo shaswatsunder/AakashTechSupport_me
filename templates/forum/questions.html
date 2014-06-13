@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block body_block %}
+	<form action='/questions/tag_search/' method='post'>
+		{% csrf_token %}
+	
+		<h1 align="center"><font color='#36A7ED'><a href='/questions/tag/'>Tags:</a><h3>{{ mytag }}</h3></font></h1>
+		<br>
+		<table width=70% align="center">
+			<tr>
+				<td align='right'><input type='text' name='search_text' placeholder="Search"><input type='submit' name='submit' value='Search Tag'></td>
+			</tr>
+		</table>
+	</form>
+	
+	
+	<div id="Tabs">
+		<ul>
+			<span style="cursor:pointer">
+				<li id="li_tab1" onclick="tab('tab1')" ><a>Sort by Date</a></li>
+				<li id="li_tab2" onclick="tab('tab2')"><a>Sort by Views</a></li>
+			</span>
+		</ul>
+		<br>
+		<br>
+			<div id="tab1">
+				<table width='80%'>	
+					{% for post in posts %}
+						<tr class='mytable'>
+							<td><img src="{% static 'images/ques.jpg' %}" width=80 height=80></td>
+							<td><h3><a href='/questions/tag/questions/{{post.pk}}/{{mytag.pk}}/' ><font face='verdana'>{{post.title}}</font></a></h3>{{post.body}}</td>
+						</tr>
+					{% endfor %}
+				</table>
+			
+		
+			</div>
+
+			<div id="tab2" style="display:none;">
+				<table width='80%'>	
+					{% for post1 in posts1 %}
+						<tr class='mytable'>
+							<td><img src="{% static 'images/ques.jpg' %}" width=80 height=80></td>
+							<td><h3><a href='/questions/tag/questions/{{post1.pk}}/{{mytag.pk}}/' ><font face='verdana'>{{post1.title}}</font></a></h3>{{post1.body}}</td>
+						</tr>
+					{% endfor %}
+				</table>
+			</div>
+	</div> <!– End of Tabs Div –>
+
+
+	
+	
+	<script type="text/javascript">
+	function tab(tab) {
+		document.getElementById('tab1').style.display = 'none';
+		document.getElementById('tab2').style.display = 'none';
+		document.getElementById('li_tab1').setAttribute("class", "");
+		document.getElementById('li_tab2').setAttribute("class", "");
+		document.getElementById(tab).style.display = 'block';
+		document.getElementById('li_'+tab).setAttribute("class", "active");
+	}
+	</script>
+{% endblock %}
+

@@ -1,0 +1,72 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+- all queries
+{% endblock title %}
+
+{% block body_block %}
+<div class="container  footer_padding" style="padding-top:2.5cm;">
+<h2>?<i class="fa fa-question-circle">{{post.title}}</h2>
+<h5><b>POST~<b/></h5>
+
+	<h5><p class="lead text-info">
+    	{{ post.body|safe|linebreaks }}</p></h5>
+
+
+<div class="post_meta">
+	by: <b>{{post.creator}}</b> | {{ post.post_date }}
+</div>
+<br/>
+<span class="glyphicon glyphicon-hand-right">
+</span>
+
+<h5><b>REPLY~<b/></h5>
+{% for reply in replies %}
+
+  		<div class="post_body">
+    		<pre class="pre-scrollable">
+    		<br/>{{ reply.body|safe|linebreaks  }}
+    		 </pre>
+     &nbsp;&nbsp;&nbsp;&nbsp; by: <b>{{reply.user}}</b> | {{ reply.reply_date }}
+  </div>
+<br/>
+<h4>Comments:</h4>
+             {% for c in comments %}
+                       <div class="post_body">
+                             <br/>{{ c.comment_body|safe|linebreaks  }}
+                               &nbsp;&nbsp;&nbsp;&nbsp; by: <b>{{c.user}}</b> | {{c.created_date }}
+                        </div>
+             {% endfor %}
+
+{% endfor %}
+<br/><br/><br/>
+<form action='/questions/youranswer' method='post'>
+	{% csrf_token %}
+	<input type='submit' name='submit' value='Your Answer' style="font-size:10pt;color:white;background-color:green;border:2px solid #336600;padding:8px" >
+</form>	
+<!---<h4>Your Answer:</h4>
+<div class="pre-scrollable">
+	<textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+</div>--->
+<br/><br/>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block body_block %}
+
+	<form action='/questions/tag_search/' method='post'>
+	{% csrf_token %}
+	
+	<h1 align="center"><font color='#36A7ED'><a href='/questions/tag/'>Tags:</a><h4>{{ mytag }}</h4></font></h1>
+	<br>
+	<table width=70% align="center">
+		<tr>
+			<td align='right' valign='top'><input type='text' name='search_text' placeholder="Search"><input type='submit' name='submit' value='Search Tag'></td>
+		</tr>
+	</form>
+	
+	<table width=100%>
+		<tr>
+			<td align='center' width=75%>
+				<table width='95%' align='center'>	
+					<tr>
+							<td><img src="{% static 'images/ques.jpg' %}" width=80 height=80></td>
+							<td><h2><font face='verdana'>{{posts.title}}</font></h2><font size='5'>{{posts.body}}</font></td>
+					</tr>
+				</table>
+				<br>
+				<br>
+				<table width='95%' align='center'>	
+					{% for rep in reply %}
+						<tr>
+							<td><img src="{% static 'images/tick.jpeg' %}" width=60 height=60></td>
+							<td style="background-color:#DCE1E1"><font face='verdana' size="4">{{rep.body}}</font></td>
+						</tr>
+					{% endfor %}
+				</table>
+			</td>
+			<td width='25%' align='center' style="padding-top:20px"; valign='top'>
+				<table style="border-width: 3px; border-color:#D1CBCB;border-style: groove;" width=80% valign='top'>
+					<tr>
+						<td align='center'>All Posts Related to {{mytag}}</td>
+					</tr>
+					{% for p in mypost %}
+						<tr><td><a href="/questions/tag/questions/{{p.pk}}/{{mytag.pk}}/">{{ forloop.counter }}.){{p.title}}</a></td></tr>
+					{% endfor %}
+				</table>
+			</td>
+		</tr>
+	</table>
+	
+{% endblock %}

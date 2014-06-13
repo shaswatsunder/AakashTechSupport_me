@@ -24,5 +24,7 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'aakashuser.views.logout_new', name='logout_new'),
     url(r'^index/$', 'aakashuser.views.index', name='index'),
     url(r'^search/$', 'aakashuser.views.search', name='index'),
-
+	
+    url(r'^questions/',include('questions.urls')),
+    
 )
